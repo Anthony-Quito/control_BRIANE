@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Equipos BRIANE</title>
+    <!-- BOOTSTRAP 4  -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+  </head>
+  <body>
+
+    <!-- NAVEGACIÓN  -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="../list_equipo.php">Equipos @BRIANE</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../tablero.php">INICIO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../list_equipo.php">LISTA</a>
+            </li>
+          </ul>
+          
+        </div>
+
+        <ul class="navbar-nav ml-auto">
+          <form class="form-inline my-2 my-lg-0">
+            <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+          </form>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row p-4">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <!-- FORMULARIO EQUIPOS -->
+              <form id="task-form">
+                <h5>Detalles de Equipo</h5>
+                <div class="form-group">
+                  <input type="text" id="sim" placeholder="SIM" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <input type="text" id="imei" placeholder="IMEI" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <table>
+                    <tr>
+                      <td><input type="text" id="serial" placeholder="N° Serial" class="form-control"></td>
+                      <td><input type="text" id="color" placeholder="Color" class="form-control"></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                  <table>
+                    <tr>
+                      <td><input type="text" id="modelo" placeholder="Modelo" class="form-control"></td>
+                      <td><input type="text" id="marca" placeholder="Marca" class="form-control"></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                  <select name="select" id="condicion" class="form-control">
+                    <option value="---" selected> --- </option>
+                    <option value="EN USO" >EN USO</option>
+                    <option value="EXTRAVIADO">EXTRAVIADO</option>
+                    <option value="MALOGRADO">MALOGRADO</option>
+                    <option value="NO TIENE">NO TIENE</option>
+                    <option value="STOCK">STOCK</option>
+                  </select>
+                </div>
+                <br>
+                <h5>Detalles de Facturación</h5>
+                <div class="form-group">
+                  <input type="text" id="recibo" placeholder="N° Recibo ENTEL" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <table>
+                    <tr>
+                      <td><input type="number" id="m_contratados" placeholder="Meses contratados" class="form-control"></td>
+                      <td><input type="number" id="m_restantes" placeholder="Meses restantes" class="form-control"></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                  <td><input type="number" step="any" id="c_18_meses" placeholder="S/. 18 meses" class="form-control"></td>
+                </div>
+
+                <div class="form-group">
+                  <td><input type="date" id="f_entrega" placeholder="Fecha Entrega" class="form-control"></td>
+                </div>
+
+                <div class="form-group">
+                  <input type="number" step="any" id="penalidad" placeholder="Penalidad" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <p>Fecha de Inicio : </p>
+                  <input type="date" id="f_inicio" placeholder="Fecha de Inicio" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <p>Fecha de Fin : </p>
+                  <input type="date" id="f_fin" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <input type="text" id="cond_plan" placeholder="Condición de Plan" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <textarea id="observacion" cols="30" rows="4" class="form-control" placeholder="Observación"></textarea>
+                </div>
+                <input type="hidden" id="taskId">
+                <button type="submit" class="btn btn-primary btn-block text-center">
+                  GUARDAR
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLA  -->
+        <div class="col-md-7">
+          <div class="card my-4" id="task-result">
+            <div class="card-body">
+              <!-- BUSCAR -->
+              <ul id="container"></ul>
+            </div>
+          </div>
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Modelo</td>
+                <td>Marca</td>
+                <td>S/. 18 meses</td>
+                <td>Cuota mensual</td>
+                <td>Condición</td>
+                <td>Observación</td>
+                <td><center>---</center></td>
+              </tr>
+            </thead>
+            <tbody id="tasks"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <!-- LÓGICA DE FRONTEND -->
+    <script src="app.js"></script>
+  </body>
+
+</html>

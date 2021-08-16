@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Módulo TRABAJADORES</title>
+    <!-- BOOTSTRAP 4  -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    
+  </head>
+  <body>
+
+    <!-- NAVIGATION  -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="../list_trabajador.php">Trabajadores @BRIANE</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../tablero.php">INICIO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../list_trabajador.php">LISTA</a>
+            </li>
+          </ul>
+          
+        </div>
+        <ul class="navbar-nav ml-auto">
+          <form class="form-inline my-2 my-lg-0">
+            <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+          </form>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row p-4">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <!-- FORM TO ADD TASKS -->
+              <form id="task-form">
+                <p>Datos Personales :</p>
+                <div class="form-group">
+                  <input type="text" id="dni" placeholder="DNI" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="nombres" placeholder="Nombres" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="apellidos" placeholder="Apellidos" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="cargo" placeholder="Cargo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <p>Plan :</p>
+                    <select name="select" id="plan" class="form-control">
+                        <option value="---" selected> --- </option>
+                        <option value="ASISTENTES - AUXILIARES - COORDINADORES">ASISTENTES - AUXILIARES - COORDINADORES</option>
+                        <option value="CONDUCTOR" >CONDUCTOR</option>
+                        <option value="GERENTE">GERENTE</option>
+                        <option value="INTERNET BASES" >INTERNET BASES</option>
+                        <option value="JEFES">JEFES</option>
+                        <option value="SUPERVISORES - ANALISTAS">SUPERVISORES - ANALISTAS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="pais" class="col-form-label">ID Equipo (Modelo) : </label>
+                                <input type="number" class="form-control" id="equipo">
+                            </td>
+                            <td width="22"></td>
+                            <td>
+                                <label for="pais" class="col-form-label">ID Número (Plan) : </label>
+                                <input type="number" class="form-control" id="numero_id">
+                            </td>
+                        </tr>
+                    </table>
+                </div> 
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>Cargador :</td>
+                            <td width="40"></td>
+                            <td>Audífono :</td>
+                            <td width="40"></td>
+                            <td>Caja :</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="select" id="cargador" class="form-control">
+                                    <option value="---" selected> --- </option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="Usado" >Usado</option>
+                                </select>
+                            </td>
+                            <td width="40"></td>
+                            <td>
+                                <select name="select" id="audifono" class="form-control">
+                                    <option value="---" selected> --- </option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="Usado" >Usado</option>
+                                </select>
+                            </td>
+                            <td width="40"></td>
+                            <td>
+                                <select name="select" id="caja" class="form-control">
+                                    <option value="---" selected> --- </option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="Usado" >Usado</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>  
+                <!--<div class="form-group">
+                  <textarea id="description" cols="30" rows="10" class="form-control" placeholder="Task Description"></textarea>
+                </div>-->
+                <input type="hidden" id="taskId">
+                <button type="submit" class="btn btn-primary btn-block text-center">
+                  GUARDAR
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLE  -->
+        <div class="col-md-7">
+          <div class="card my-4" id="task-result">
+            <div class="card-body">
+              <!-- SEARCH -->
+              <ul id="container"></ul>
+            </div>
+          </div>
+
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>NOMBRES</th>
+                <th>APELLIDOS</th>
+                <th>CARGO</th>
+                <th>-</th>
+              </tr>
+            </thead>
+            <tbody id="tasks">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- JQuery, Popper.js, Bootstrap JS-->
+    <script src="jquery/jquery-3.3.1.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <!-- Frontend Logic -->
+    
+    <script src="app.js"></script>
+  </body>
+
+</html>
